@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <!-- when using the mode "code", it's important to specify charset utf-8 -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.5.10/jsoneditor.css" />
+  <link href="temp.css" media="screen" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <p>
+      Load a JSON document (this is here for me to learn how to use FileReader): <input type="file" id="loadDocument" value="Load" />
+    </p>
+    <p>
+      Save a JSON document (as shown in the editor): <input type="button" id="saveDocument" value="Save" />
+    </p>
+
+    <div id="codeEditor"style="width: 500px; height: 500px;">
+      <button id="toTree" class="convert" title="Copy code to tree editor (Ctrl + >)"> ->
+        <div class="convert-right"></div>
+      </button>
+    </div>
+
+
+    <div id="treeViewer" style="width: 500px; height: 500px;">
+      <button id="toCode" class="convert" title="Copy tree to code editor (Ctrl + <)"> <-
+        <div class="convert-left"></div>
+      </button>
+    </div>
+  </body>
+
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.5.10/jsoneditor.js"></script>
+  <script src="https://bgrins.github.io/filereader.js/filereader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+
+  <script type="text/javascript" src="temp.js"></script>
+  
+  <script type="text/javascript">
+    $(document).on('ready', function() {
+      new Editor();
+    })
+  </script>
+</html>
