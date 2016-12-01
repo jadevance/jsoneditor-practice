@@ -15,15 +15,17 @@
       Save a JSON document (as shown in the editor): <input type="button" id="saveDocument" value="Save" />
     </p>
 
-    <div id="codeEditor"style="width: 500px; height: 500px;">
-      <button id="toTree" class="convert" title="Copy code to tree editor (Ctrl + >)"> ->
+    <div id="codeContainer"style="width: 500px; height: 500px;">
+      <button id="toTree" class="convert" title="Copy code to tree editor">
+        ->
         <div class="convert-right"></div>
       </button>
     </div>
+    
 
-
-    <div id="treeViewer" style="width: 500px; height: 500px;">
-      <button id="toCode" class="convert" title="Copy tree to code editor (Ctrl + <)"> <-
+    <div id="treeContainer" style="width: 500px; height: 500px;">
+      <button id="toCode" class="convert" title="Copy tree to code editor">
+        <-
         <div class="convert-left"></div>
       </button>
     </div>
@@ -36,9 +38,9 @@
 
   <script type="text/javascript" src="temp.js"></script>
   
-  <script type="text/javascript">
-    $(document).on('ready', function() {
-      new Editor();
-    })
+  <script>
+    $(document).ready(function() {
+      new Editor().init('#codeContainer');
+    });
   </script>
 </html>
