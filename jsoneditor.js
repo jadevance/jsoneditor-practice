@@ -6,16 +6,6 @@ function Editor() {
   this.jsonEditor     = null;
   this.jsonTree       = null;
 
-
-  this.jsonImport = FileReaderJS.setupInput(document.getElementById('loadDocument'), {
-    readAsDefault: 'Text',
-    on: {
-      load: function (event, file) {
-        self.jsonEditor.setText(event.target.result);
-      }
-    }
-  });
-
   // default 
   this.json = {
     "Array": [1, 2, 3],
@@ -31,7 +21,7 @@ function Editor() {
     var codeOptions = {
       mode: 'code',
       onError: function(error) {
-          alert(error.toString());
+        alert(error.toString());  
     },
       search: true
     }
@@ -65,32 +55,34 @@ function Editor() {
 
     var treeOptions = {
       mode: 'tree',
-      onError: function (err) {
-        alert(err.toString());
+      onError: function (error) {
+        alert(error.toString());
       },
       search: true
     };
     self.jsonTree = new JSONEditor(self.treeContainer, treeOptions, self.json);
   }
+
+  this.jsonImport = FileReaderJS.setupInput(document.getElementById('loadDocument'), {
+    readAsDefault: 'Text',
+    on: {
+      load: function (event, file) {
+        self.jsonEditor.setText(event.target.result);
+      }
+    }
+  });
+
+  this.jsonSave = document.getElementById('saveDocument').onclick = function () {
+    fname = window.prompt("Save as...");
+    if (fname.indexOf(".") == -1) {
+      fname = fname + ".json";
+    } else {
+        if (fname.split('.').pop().toLowerCase() == "json") {
+        } else {
+          fname = fname.split('.')[0] + ".json";
+        }
+    }
+    var blob = new Blob([self.jsonEditor.getText()], { type: 'application/json;charset=utf-8' });
+    saveAs(blob, fname);
+  };
 };
-
-
-    // // Save a JSON document
-    // document.getElementById('saveDocument').onclick = function () {
-
-    //     // Save Dialog
-    //     fname = window.prompt("Save as...");
-
-    //     // Check json extension in file name
-    //     if (fname.indexOf(".") == -1) {
-    //         fname = fname + ".json";
-    //     } else {
-    //         if (fname.split('.').pop().toLowerCase() == "json") {
-    //             // Nothing to do
-    //         } else {
-    //             fname = fname.split('.')[0] + ".json";
-    //         }
-    //     }
-    //     var blob = new Blob([jsonEditor.getText()], { type: 'application/json;charset=utf-8' });
-    //     saveAs(blob, fname);
-    // };
