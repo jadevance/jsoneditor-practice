@@ -22,8 +22,7 @@ function Editor() {
       mode: 'code',
       onError: function(error) {
         alert(error.toString());  
-    },
-      search: true
+      }
     }
 
     self.jsonEditor = new JSONEditor(codeContainer, codeOptions, self.json);
@@ -44,12 +43,6 @@ function Editor() {
     self.jsonEditor.set(json);
   }
 
-
-  this.setJson = function() {
-    self.jsonEditor = self.jsonEditor.get()
-    self.buildTreeViewer();
-  }
-
   this.buildTreeViewer = function() {
     self.treeContainer = document.getElementById("treeContainer");
 
@@ -68,6 +61,7 @@ function Editor() {
     on: {
       load: function (event, file) {
         self.jsonEditor.setText(event.target.result);
+        self.updateTree();
       }
     }
   });
